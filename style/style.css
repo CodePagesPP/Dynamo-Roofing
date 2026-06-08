@@ -1,3 +1,8 @@
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
 :root {
     --dark-blue: #111a24;
     --copper: #b65f33;
@@ -84,25 +89,28 @@ nav ul li a {
     display: flex;
     align-items: center;
     gap: 5px;
-}
-
-nav ul li a:hover {
-    color: #fff;
-}
-
-nav ul li a.active {
-    color: #fff;
     position: relative;
 }
 
-nav ul li a.active::after {
+nav ul li a::after {
     content: '';
     position: absolute;
     bottom: -5px;
     left: 0;
-    width: 100%;
+    width: 0;
     height: 2px;
     background-color: var(--copper);
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #fff;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 100%;
 }
 
 .nav-icon {

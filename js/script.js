@@ -6,9 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
             function updateSlider() {
                 cards.forEach((card, index) => {
-                    // Limpiamos las clases de estado
                     card.classList.remove('active', 'prev', 'next');
-                    card.style.opacity = ''; // Reset opacity
+                    card.style.opacity = ''; 
 
                     
                     if (index === currentIdx) {
@@ -18,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     } else if (index === currentIdx + 1 || (currentIdx === cards.length - 1 && index === 0)) {
                         card.classList.add('next');
                     } else {
-                        // Si hubiera más de 3 tarjetas, las demás se ocultarían
                         card.style.opacity = '0'; 
                     }
                 });
@@ -32,5 +30,40 @@ document.addEventListener("DOMContentLoaded", function() {
             btnNext.addEventListener('click', () => {
                 currentIdx = (currentIdx === cards.length - 1) ? 0 : currentIdx + 1;
                 updateSlider();
+            });
+
+            const sections = document.querySelectorAll('main, section, footer');
+            const navLinks = document.querySelectorAll('nav ul li a[href^="#"]:not([href="#"])');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= (sectionTop - 120)) {
+                        if (section.getAttribute('id')) {
+                            current = section.getAttribute('id');
+                        }
+                    }
+                });
+
+                if ((window.innerHeight + Math.ceil(window.pageYOffset)) >= document.body.offsetHeight - 20) {
+                    current = 'contact';
+                }
+
+                if (current) {
+                    navLinks.forEach(a => {
+                        a.classList.remove('active');
+                        if (a.getAttribute('href') === `#${current}`) {
+                            a.classList.add('active');
+                        }
+                    });
+                }
+
+                if (pageYOffset < 100) {
+                    navLinks.forEach(a => a.classList.remove('active'));
+                    const homeLink = document.querySelector('nav ul li a[href="#home"]');
+                    if (homeLink) homeLink.classList.add('active');
+                }
             });
         });
