@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 cards.forEach((card, index) => {
                     // Limpiamos las clases de estado
                     card.classList.remove('active', 'prev', 'next');
+                    card.style.opacity = ''; // Reset opacity
+
                     
                     if (index === currentIdx) {
                         card.classList.add('active');
