@@ -35,6 +35,17 @@ document.addEventListener("DOMContentLoaded", function() {
             const sections = document.querySelectorAll('main, section, footer');
             const navLinks = document.querySelectorAll('nav ul li a[href^="#"]:not([href="#"])');
 
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
             window.addEventListener('scroll', () => {
                 let current = '';
 
