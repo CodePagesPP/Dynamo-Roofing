@@ -22,6 +22,32 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             }
 
+                    // Seleccionamos todos los items de las FAQs
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+
+                question.addEventListener('click', () => {
+                    // Comprobamos si el item actual ya está activo
+                    const isActive = item.classList.contains('active');
+
+                    // Opcional: Cerramos todos los demás items primero (efecto acordeón único)
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+
+                    // Si no estaba activo, lo abrimos
+                    if (!isActive) {
+                        item.classList.add('active');
+                        // Asignamos el max-height dinámicamente según el contenido
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    }
+                });
+            });
+
             btnPrev.addEventListener('click', () => {
                 currentIdx = (currentIdx === 0) ? cards.length - 1 : currentIdx - 1;
                 updateSlider();
