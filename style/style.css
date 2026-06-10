@@ -1812,10 +1812,13 @@ nav ul li a.active::after {
 .trust-left {
     flex: 4;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .trust-right {
     flex: 6;
+    justify-content: center;
     min-width: 0;
     display: flex;
     flex-direction: column;
@@ -1872,90 +1875,129 @@ nav ul li a.active::after {
 /* Promo Box */
 .promo-box {
     background-color: var(--dark-blue);
-    color: #fff;
-    display: flex;
     position: relative;
-    border: 2px solid var(--copper);
-    padding: 5px; 
+    padding: 7px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    clip-path: polygon(
+        25px 0, 100% 0, 
+        100% 25px, 100% calc(100% - 25px), 
+        calc(100% - 25px) 100%, 25px 100%, 
+        0 100%, 0 25px
+    );
+}
+
+.promo-copper-line {
+    background-color: var(--copper);
+    padding: 2px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    clip-path: polygon(
+        23px 0, 100% 0, 
+        100% 23px, 100% calc(100% - 23px), 
+        calc(100% - 23px) 100%, 23px 100%, 
+        0 100%, 0 23px
+    );
 }
 
 .promo-inner {
     display: flex;
-    border: 1px solid rgba(182, 95, 51, 0.4);
     width: 100%;
+    flex: 1;
+    background-color: var(--dark-blue);
+    clip-path: polygon(
+        22px 0, 100% 0, 
+        100% 22px, 100% calc(100% - 22px), 
+        calc(100% - 22px) 100%, 22px 100%, 
+        0 100%, 0 22px
+    );
 }
 
 .promo-content {
-    padding: 30px;
-    flex: 0 0 55%;
+    padding: 40px 60px 40px 40px;
+    flex: 0 0 65%;
     position: relative;
     z-index: 2;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.promo-content::before {
+    content: '';
+    position: absolute;
+    top: -50px; bottom: -50px; left: -50px; right: -2px;
+    background-color: var(--copper);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 80px) 100%, 0 100%);
+    z-index: -2;
+}
+
+.promo-content::after {
+    content: '';
+    position: absolute;
+    top: -50px; bottom: -50px; left: -50px; right: 0;
+    background-color: var(--dark-blue);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 80px) 100%, 0 100%);
+    z-index: -1;
 }
 
 .promo-header {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: 25px;
+    margin-bottom: 25px;
 }
 
-.promo-header .shield-icon {
-    font-size: 32px;
-    color: var(--copper);
+.promo-shield-icon {
+    width: 65px;
+    height: 75px;
+    flex-shrink: 0;
 }
 
 .promo-header h3 {
     font-family: var(--font-heading);
-    font-size: 20px;
+    font-size: 26px;
     font-weight: 600;
     line-height: 1.2;
+    color: #fff;
+    letter-spacing: 1px;
 }
 
 .promo-highlight {
     color: var(--copper);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
-    margin-bottom: 15px;
-    line-height: 1.4;
-}
-
-.promo-text {
-    font-size: 13px;
-    color: #d0d5db;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     line-height: 1.5;
 }
 
-.btn-promo {
+.promo-content .btn-primary {
     display: inline-flex;
-    align-items: center;
-    background-color: transparent;
-    color: var(--copper);
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 600;
-    transition: opacity 0.3s;
+    width: auto;
+    justify-content: center;
+    background: linear-gradient(135deg, #c77242 0%, #b2582b 100%);
+    border: none;
+    border-radius: 2px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 30px;
+    color: #fff;
+    text-transform: uppercase;
 }
 
-.btn-promo:hover {
-    opacity: 0.8;
+.promo-content .btn-primary:hover {
+    background: linear-gradient(135deg, #b2582b 0%, #c77242 100%);
 }
 
 .promo-image {
-    flex: 0 0 45%;
-    position: relative;
-    overflow: hidden;
-}
-
-.promo-image::before {
-    content: '';
     position: absolute;
-    top: 0;
-    left: -40px;
-    width: 80px;
-    height: 100%;
-    background-color: var(--dark-blue);
-    transform: skewX(-15deg);
+    top: 0; right: 0; bottom: 0;
+    width: 45%;
     z-index: 1;
 }
 
@@ -2114,7 +2156,16 @@ nav ul li a.active::after {
     .promo-inner {
         flex-direction: column;
     }
+    .promo-content {
+        flex: 1;
+        padding: 30px;
+    }
+    .promo-content::before, .promo-content::after {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
     .promo-image {
+        position: relative;
+        width: 100%;
         height: 250px;
     }
     .promo-image::before {
