@@ -23,7 +23,14 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./style/style.css">
-    <script src="./js/script.js" defer></script>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+      }
+    }
+    </script>
+    <script type="module" src="./js/script.js"></script>
 </head>
 
 <body>
@@ -55,40 +62,18 @@
         </div>
     </header>
 
-    <main id="home">
-        <div class="hero-wrapper">
-            <div class="hero-inner">
-                <div class="hero-overlay"></div>
-    
-                <div class="hero-content">
-                    <div class="hero-tagline">
-                        BUILT STRONG.<br>
-                        PROTECTING WHAT MATTERS.
-                    </div>
-    
-                    <h1 class="hero-title">
-                        <span class="blue-text">PROTECT</span><br>
-                        <span class="copper-text">WHAT</span><br>
-                        <span class="copper-text">MATTERS MOST</span>
-                    </h1>
-    
-                    <p class="hero-desc">
-                        Premium roofing solutions for homes across Ohio, Kentucky, and West Virginia - built
-                        with precision, protected with pride, and backed by a team you can trust.
-                    </p>
-    
-                    <div class="button-group">
-                        <button class="btn btn-primary">
-                            GET A FREE ESTIMATE <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-                        <button class="btn btn-secondary">
-                            <i class="fa-solid fa-phone"></i> CALL 740 480-3201
-                        </button>
-                    </div>
-                </div>
+    <main id="home" class="scroll-hero">
+        <div class="sticky-container">
+            <div id="loader">
+                <div id="progress-bar"><div id="progress-fill"></div></div>
             </div>
+            
+            <div id="canvas-stage"></div>
         </div>
     </main>
+
+    <!-- WRAPPER TO PREVENT HORIZONTAL OVERFLOW WITHOUT BREAKING STICKY -->
+    <div style="overflow-x: hidden; width: 100%;">
 
     <section id="services" class="services-section">
         <div class="srv-container">
