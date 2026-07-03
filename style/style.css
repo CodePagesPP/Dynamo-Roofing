@@ -1630,7 +1630,7 @@ nav ul li a.active::after {
     position: relative;
     margin: 2px;
     clip-path: polygon(24px 0, calc(100% - 24px) 0, 100% 24px, 100% calc(100% - 24px), calc(100% - 24px) 100%, 24px 100%, 0 calc(100% - 24px), 0 24px);
-    background: url('../assets/main.webp') center/cover no-repeat;
+    background: url('../assets/PORTADA\ ARRIBA\ Y\ ABAJO.webp') center/cover no-repeat;
     z-index: 2;
     min-height: 480px;
 }
