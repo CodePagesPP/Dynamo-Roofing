@@ -212,8 +212,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const sections = document.querySelectorAll('main, section, footer');
             const navLinks = document.querySelectorAll('nav ul li a[href^="#"]:not([href="#"])');
+            const allInternalLinks = document.querySelectorAll('a[href^="#"]:not([href="#"])');
 
-            navLinks.forEach(link => {
+            allInternalLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
