@@ -45,40 +45,14 @@ header {
 
 .logo-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    border: 2px solid var(--copper);
     padding: 10px 20px;
-    position: relative;
 }
 
-.logo-container::before {
-    content: "\f0d8 \f0d8 \f0d8";
-    font-family: 'FontAwesome';
-    position: absolute;
-    top: -15px;
-    background-color: var(--dark-blue);
-    padding: 0 10px;
-    color: var(--copper);
-    font-size: 14px;
-}
-
-.logo-text-main {
-    font-family: var(--font-heading);
-    font-size: 24px;
-    letter-spacing: 3px;
-    color: #fff;
-}
-
-.logo-text-sub {
-    font-size: 10px;
-    letter-spacing: 5px;
-    color: var(--copper);
-    margin-top: 5px;
-    position: relative;
-    background-color: var(--dark-blue);
-    padding: 0 5px;
-    margin-bottom: -15px;
+.logo-img {
+    width: clamp(140px, 12vw, 120px);
+    height: auto;
+    max-width: 100%;
 }
 
 nav ul {
