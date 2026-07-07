@@ -3027,6 +3027,14 @@ nav ul li a.active::after {
     background-position: center;
 }
 
+@media (max-width: 768px) {
+    #home.scroll-hero .sticky-container {
+        background-image: url('../assets/frames-vertical/frame_0001.jpg');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+
 #canvas-stage {
     position: absolute;
     top: 0;
