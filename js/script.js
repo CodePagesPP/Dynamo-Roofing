@@ -7,8 +7,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const progressFill = document.getElementById("progress-fill");
 
     if (stage && loader && progressFill) {
-        const TOTAL_FRAMES = 121;
-        const FRAME_PATH = (i) => `./assets/frames/frame_${String(i + 1).padStart(4, "0")}.jpg`;
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        const TOTAL_FRAMES = isMobile ? 151 : 121;
+        const FRAME_PATH = (i) => isMobile 
+            ? `./assets/frames-vertical/frame_${String(i + 1).padStart(4, "0")}.jpg`
+            : `./assets/frames/frame_${String(i + 1).padStart(4, "0")}.jpg`;
         
         const scene = new THREE.Scene();
         const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
@@ -20,6 +23,12 @@ document.addEventListener("DOMContentLoaded", function() {
         
         function resizeRenderer() {
             const container = stage.parentElement;
+            const header = document.querySelector("header");
+            if (header) {
+                const headerHeight = header.offsetHeight;
+                container.style.height = `calc(100vh - ${headerHeight}px)`;
+                container.style.top = `${headerHeight}px`;
+            }
             renderer.setSize(container.clientWidth, container.clientHeight);
         }
         resizeRenderer();
@@ -48,10 +57,20 @@ document.addEventListener("DOMContentLoaded", function() {
             const boxHeight = 2;
             let targetWidth = boxHeight * imageAspect;
             let targetHeight = boxHeight;
-            // Emulate background-size: cover
-            if (targetWidth < boxWidth) {
-                targetWidth = boxWidth;
-                targetHeight = boxWidth / imageAspect;
+            // Emulate background-size: cover for desktop, contain for mobile
+            const isMobileView = window.matchMedia("(max-width: 768px)").matches;
+            if (isMobileView) {
+                // background-size: contain
+                if (targetWidth > boxWidth) {
+                    targetWidth = boxWidth;
+                    targetHeight = boxWidth / imageAspect;
+                }
+            } else {
+                // background-size: cover
+                if (targetWidth < boxWidth) {
+                    targetWidth = boxWidth;
+                    targetHeight = boxWidth / imageAspect;
+                }
             }
             plane.scale.set((targetWidth / 2) * 1.01, (targetHeight / 2) * 1.01, 1);
         }
